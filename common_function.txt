@@ -20,7 +20,7 @@ text.clean = function(x,                    # x=text_corpus
   x  =  gsub("<.*?>", " ", x)               # regex for removing HTML tags
   x  =  iconv(x, "latin1", "ASCII", sub="") # Keep only ASCII characters
   x  =  gsub("[^[:alnum:]]", " ", x)        # keep only alpha numeric 
-  x  =  str_replace_all("https[A-Za-z0-9]*", " ",x) 
+  x  =  str_replace_all("https[A-Za-z0-9]*", "", x ) 
   x  =  tolower(x)                          # convert to lower case characters
   
   if (remove_numbers) { x  =  removeNumbers(x)}    # removing numbers
