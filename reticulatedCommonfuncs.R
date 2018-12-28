@@ -5,6 +5,8 @@ library(reticulate)
 library(stringr)
 require(tidyverse)
 
+#penn_treebank = read.csv('https://raw.githubusercontent.com/sudhir-voleti/sample-data-sets/master/penn_treebank.csv', 
+#                         header=TRUE)
 
 # defining a purely clean_text op
 clean_text <- function(text, lower=FALSE, alphanum=FALSE, drop_num=FALSE){
@@ -12,13 +14,11 @@ clean_text <- function(text, lower=FALSE, alphanum=FALSE, drop_num=FALSE){
   
   if (lower=="TRUE") {text = text %>% str_to_lower()}
   if (alphanum=="TRUE") {text = text %>% str_replace_all("[^[:alnum:]]", " ")}
-  if (drop_num=="TRUE") {text = text %>% str_replace_all("[:digit:]", " ")}
-  
-  #text =   text %>% str_replace_all("https[A-Za-z0-9]*", "" )
-  #text =   text %>% iconv( "latin1", "ASCII", sub="") 
+  if (drop_num=="TRUE") {text = text %>% str_replace_all("[:digit:]", "")}
   
   # collapse multiple spaces
-  text = text %>% str_replace_all("\\\\s+", " ")  
+  text = text %>%   
+    str_replace_all("\\\\s+", " ")  
   
   return(text) } # clean_text() ends
 
@@ -304,3 +304,9 @@ py.dtm_stemmer <- function(dtm1){
   
   return(dtm2)    }     # func ends
 
+# try on nokia dataset
+# dtm_nokia = nokia %>% clean_text(lower=TRUE, alphanum=TRUE) %>% bigram_replace() %>%
+#		dtm_cast() %>% preprocess_dtm()  # 1.65 secs
+# dim(dtm_nokia)    # 120x443
+# dtm_nokia = py.dtm_stemmer(dtm_nokia)   # 0.55 secs
+# dim(dtm_nokia)    # 120x400. ~10% drop
