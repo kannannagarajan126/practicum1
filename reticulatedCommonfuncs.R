@@ -15,7 +15,7 @@ clean_text <- function(text, lower=FALSE, alphanum=FALSE, drop_num=FALSE){
   if (drop_num=="TRUE") {text = text %>% str_replace_all("[:digit:]", "")}
   
   text =   text %>% str_replace_all("https[A-Za-z0-9]*", "" )
-  text =   text %>% iconv( "latin1", "ASCII", sub="") 
+  #text =   text %>% iconv( "latin1", "ASCII", sub="") 
   
   # collapse multiple spaces
   text = text %>% str_replace_all("\\\\s+", " ")  
