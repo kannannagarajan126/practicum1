@@ -5,13 +5,13 @@ library(reticulate)
 library(stringr)
 require(tidyverse)
 
-#penn_treebank = read.csv('https://raw.githubusercontent.com/sudhir-voleti/sample-data-sets/master/penn_treebank.csv', 
-#                         header=TRUE)
+penn_treebank = read.csv('https://raw.githubusercontent.com/sudhir-voleti/sample-data-sets/master/penn_treebank.csv', 
+                         header=TRUE)
 
 # defining a purely clean_text op
 clean_text <- function(text, lower=FALSE, alphanum=FALSE, drop_num=FALSE){
-  text  =  str_replace_all(text, "<.*?>", " ")
-  #text  =   str_replace_all(text,"https[A-Za-z0-9]*", " " )
+  text  =  str_replace_all(text, "<.*?>", " ")  
+  text=str_replace_all(text,"https[A-Za-z0-9]*", " " )
   
   if (lower=="TRUE") {text = text %>% str_to_lower()}
   if (alphanum=="TRUE") {text = text %>% str_replace_all("[^[:alnum:]]", " ")}
