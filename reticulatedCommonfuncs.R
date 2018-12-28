@@ -10,8 +10,7 @@ penn_treebank = read.csv('https://raw.githubusercontent.com/sudhir-voleti/sample
 
 # defining a purely clean_text op
 clean_text <- function(text, lower=FALSE, alphanum=FALSE, drop_num=FALSE){
-  text  =  str_replace_all(text, "<.*?>", " ")  
-  text=str_replace_all(text,"https[A-Za-z0-9]*", " " )
+  text  =  str_replace_all(text, "<.*?>", " ")   # drop html junk
   
   if (lower=="TRUE") {text = text %>% str_to_lower()}
   if (alphanum=="TRUE") {text = text %>% str_replace_all("[^[:alnum:]]", " ")}
